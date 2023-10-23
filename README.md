@@ -15,13 +15,13 @@ typedef int RARESCAR;
 typedef std::char RENEGADERAIDER;
 
 void myfortniteskills(){
-    cout << "momhelp";
+    std::cout << "momhelp";
 }
 
 
 int main(){
     RENEGADERAIDER crackedAtFortnite = "cracked"
-    cout << "CrackedAtFortnite;
+    std::cout << "CrackedAtFortnite;
 
     return 0;
 }
