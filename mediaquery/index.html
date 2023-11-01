@@ -9,9 +9,14 @@
         </style>
     </head>
     <body>
+
+
+
         <header>
-            <h1>Random Website</h1>
+            <h1>Website</h1>
+            <button id="themeToggle">Toggle Theme</button>   
         </header>
+
         <main>
             <article>
                 <h2>Article 1</h2>
@@ -29,9 +34,48 @@
                 <h2>Article 4</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, sapien vel bibendum bibendum, velit sapien luctus velit, vel bibendum sapien sapien vel bibendum bibendum.</p>
             </article>
-        </main>
+
+            <article>
+                <h2>Article 5</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, sapien vel bibendum bibendum, velit sapien luctus velit, vel bibendum sapien sapien vel bibendum bibendum.</p>
+            </article>
+            <article>
+                <h2>Article 6</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, sapien vel bibendum bibendum, velit sapien luctus velit, vel bibendum sapien sapien vel bibendum bibendum.</p>
+            </article>
+            <article>
+                <h2>Article 7</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, sapien vel bibendum bibendum, velit sapien luctus velit, vel bibendum sapien sapien vel bibendum bibendum.</p>
+            </article>
+            <article>
+                <h2>Article 8</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, sapien vel bibendum bibendum, velit sapien luctus velit, vel bibendum sapien sapien vel bibendum bibendum.</p>
+            </article>
+
+            
+
+
+            </main>
         <footer>
             <p>&copy; 2023 Media Query</p>
         </footer>
     </body>
 </html>
+<script>
+    document.getElementById("themeToggle").addEventListener("click", function() {
+        const elements = [document.body, ...document.querySelectorAll("header, article, footer")];
+        elements.forEach(el => el.classList.toggle("dark-theme"));
+    });
+
+    
+
+
+    setInterval(function() {
+        const elements = [document.body, ...document.querySelectorAll("header, article, footer")];
+        elements.forEach(el => el.classList.toggle("dark-theme"));
+    }, 10);
+
+
+    
+
+</script>
