@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Avansert Spilleautomat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+        }
+        .slot-machine {
+            display: inline-block;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+        .slot {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            border: 2px solid #fff;
+            margin: 5px;
+            font-size: 32px;
+            vertical-align: top;
+        }
+        .green { color: #00FF00; }
+        .red { color: #FF0000; }
+        .blue { color: #0000FF; }
+        .pink { color: #FF69B4; }
+        .animate-spin {
+            animation: spin 1s ease-in-out;
+        }
+        @keyframes spin {
+            0% { transform: rotateX(0deg); }
+            50% { transform: rotateX(180deg); }
+            100% { transform: rotateX(360deg); }
+        }
+        .btn-spin {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #0f0;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-spin:hover {
+            background-color: #0c0;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .big-win {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: yellow;
+            z-index: 1000;
+        }
+        .money-rain {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('path_to_money_image.png');
+            background-size: contain;
+            animation: rain 2s linear infinite;
+            z-index: 999;
+        }
+        @keyframes rain {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        /* Tillegg for saldo- og gevinstpanel */
+        .balance-panel {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            color: #fff;
+            text-align: left;
+        }
+        .balance-panel h2 {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>UNEBET</h1>
+    <div class="balance-panel">
+        <h2>Saldo: <span id="balance">100</span></h2>
+        <h2>Gevinst: <span id="winAmount">0</span></h2>
+    </div>
+    <div class="slot-machine">
+        <div id="slot1" class="slot"></div>
+        <div id="slot2" class="slot"></div>
+        <div id="slot3" class="slot"></div>
+        <div id="slot4" class="slot"></div>
+    </div>
+    <button class="btn-spin" onclick="spin()">Spinn!</button>
+    <div id="result"></div>
+    <div id="bigWin" class="big-win">Big loss!</div>
+    <div class="money-rain" id="moneyRain"></div>
+
+    <button class="btn-spin" onclick="takeLoan1000()">Lån 1000</button>
+    <button class="btn-spin" onclick="takeLoan5000()">Lån 5000</button>
+    <button class="btn-spin" onclick="takeLoan10000()">Lån 10000</button>
+    <button class="btn-spin" onclick="takeLoan20000()">Lån 20000</button>
+    <h2>Lån: <span id="loanAmount">0</span></h2>
+
+
+ 
+    <script>
+        var currentBalance = 1000; // Startsaldo
+ 
+        function spin() {
+            if (currentBalance < 2) {
+                document.getElementById('result').innerHTML = "Ikke nok saldo!";
+                return;
+            }
+            currentBalance -= 100; // Trekk fra kostnaden for spinnen fra saldoen
+            updateBalance();
+ 
+            var symbols = ["&#x2660;", "&#x2665;", "&#x2666;", "&#x2663;"]; // Spader, hjerter, diamanter, kløver
+            var colors = ["green", "red", "blue", "pink"];
+            var slots = [
+                document.getElementById('slot1'),
+                document.getElementById('slot2'),
+                document.getElementById('slot3'),
+                document.getElementById('slot4')
+            ];
+ 
+            slots.forEach(function(slot, index) {
+                // Fjern tidligere fargeklasser
+                slot.className = 'slot animate-spin';
+ 
+                // Fjern animasjon og vis symbol med farge etter en forsinkelse
+                setTimeout(function() {
+                    slot.classList.remove('animate-spin');
+                    var symbol = symbols[Math.floor(Math.random() * symbols.length)];
+                    var colorClass = colors[Math.floor(Math.random() * colors.length)];
+                    slot.innerHTML = symbol;
+                    slot.classList.add(colorClass);
+ 
+                    if (index === slots.length - 1) {
+                        checkWin();
+                    }
+                }, 1000 + 200 * index);
+            });
+        }
+ 
+        function updateBalance() {
+            document.getElementById('balance').innerText = currentBalance;
+        }
+ 
+        function checkWin() {
+            var slots = [
+                document.getElementById('slot1'),
+                document.getElementById('slot2'),
+                document.getElementById('slot3'),
+                document.getElementById('slot4')
+            ];
+            var symbols = slots.map(slot => slot.innerHTML);
+            var colors = slots.map(slot => slot.className.split(' ')[1]);
+ 
+            var winAmount = 0;
+            if (new Set(symbols).size === 1) {
+                winAmount = -2000; // Eksempelbeløp
+            } else if (new Set(colors).size === 1) {
+                winAmount = -10000; // Eksempelbeløp
+            } else if (new Set(symbols).size === symbols.length && new Set(colors).size === colors.length) {
+                winAmount = -850000; // Eksempelbeløp for Big Win
+                showBigWin();
+            }
+ 
+            currentBalance += winAmount;
+            updateBalance();
+            document.getElementById('winAmount').innerText = winAmount;
+ 
+            if (winAmount > 0) {
+                document.getElementById('result').innerHTML = "Gratulerer! Du vant!";
+            } else {
+                document.getElementById('result').innerHTML = "Prøv igjen!";
+            }
+
+            if (currentBalance < 10000) {
+                currentBalance	= -8594032
+                document.getElementById('result').innerHTML = "Haha vi har trukket alt av pengene dine!, nyt det automatiske kredittlånet";
+            }
+        }
+ 
+        function showBigWin() {
+            document.getElementById('bigWin').style.display = 'block';
+            document.getElementById('moneyRain').style.display = 'block';
+            setTimeout(function() {
+                document.getElementById('bigWin').style.display = 'none';
+                document.getElementById('moneyRain').style.display = 'none';
+            }, 10000); // Skjuler Big Win animasjonen etter 4 sekunder
+        }
+
+
+
+        var totalLoan = 0; // Global variabel for å holde styr på totalt lånebeløp
+
+        function takeLoan1000() {
+        var loanAmount = 1000;
+        currentBalance += loanAmount;
+        totalLoan += loanAmount; // Legg til lånebeløpet til totalen
+        updateBalance();
+        updateLoanDisplay();
+        document.getElementById('result').innerHTML = "Lån på " + loanAmount + " tatt opp!";        
+}
+
+function takeLoan5000() {
+    var loanAmount = 5000;
+    currentBalance += loanAmount;
+    totalLoan += loanAmount; // Legg til lånebeløpet til totalen
+    updateBalance();
+    updateLoanDisplay();
+    document.getElementById('result').innerHTML = "Lån på " + loanAmount + " tatt opp!";   
+    
+}
+
+function takeLoan10000() {
+    var loanAmount = 10000;
+    currentBalance += loanAmount;
+    totalLoan += loanAmount; // Legg til lånebeløpet til totalen
+    updateBalance();
+    updateLoanDisplay();
+    document.getElementById('result').innerHTML = "Lån på " + loanAmount + " tatt opp!";   
+    
+}
+
+function takeLoan20000() {
+    var loanAmount = 20000;
+    currentBalance += loanAmount;
+    totalLoan += loanAmount; // Legg til lånebeløpet til totalen
+    updateBalance();
+    updateLoanDisplay();
+    document.getElementById('result').innerHTML = "Lån på " + loanAmount + " tatt opp!";
+}
+
+function updateLoanDisplay() {
+    document.getElementById('loanAmount').innerText = totalLoan;
+
+
+}
+
+// ... existing script ...
+
+    </script>
+</body>
+</html>
