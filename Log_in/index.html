@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="username">
+    <label for="username">Userame</label>
+    <input type="text" name="" id="password">
+    <label for="password">Password</label>
+
+    <input type="button" id="checkLogin">
+</body>
+</html>
+
+<script>
+    let username = document.getElementById("username").addEventListener("click", checkLogin);
+    let password = document.getElementById("password").addEventListener("click", checkLogin);
+
+    function checkLogin() {
+        if (username == "admin" && password == "1234") {
+            alert("Velkommen din jævel!")
+        } else {
+            alert("Du er ikke velkommen din jævel!")
+        }
+    }
+
+</script>

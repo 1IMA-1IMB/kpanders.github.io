@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duck Check</title>
+</head>
+<body>
+
+    <label>
+        <input type="checkbox" id="checkbox1"> It walks like a duck
+    </label>
+    <br>
+    <label>
+        <input type="checkbox" id="checkbox2"> and it quacks
+    </label>
+    <br>
+    <button onclick="checkDuck()">Check Duck</button>
+
+    <p id="result"></p>
+
+    <script>
+        function checkDuck() {
+            let checkbox1 = document.getElementById("checkbox1").checked;
+            let checkbox2 = document.getElementById("checkbox2").checked;
+            let resultElement = document.getElementById("result");
+
+            if (checkbox1 && checkbox2) {
+                resultElement.textContent = "Then it is a duck";
+            } else {
+                resultElement.textContent = "It is not a duck";
+            }
+        }
+    </script>
+
+</body>
+</html>

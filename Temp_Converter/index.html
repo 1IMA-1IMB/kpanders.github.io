@@ -1,0 +1,54 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+
+    <!-- -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="script.js">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- -->
+
+    </head>
+    <body>
+
+    <h1>Fahrenheit til Celsius</h1>
+    <label>Fahrenheit</label>
+    <input id="Converter" type="number" placeholder="Fahrenheit" oninput="TempConvF(this.value)" onchange="TempConvF(this.value)">
+    <p> Celsius: <span id="Fahrenheit_to_Celsius"></span></p>
+ 
+    <h1>Celsius til Fahrenheit</h1>
+    <label>Celsius</label>
+    <input id="Converter" type="number" placeholder="Celsius" oninput="TempConvC(this.value)" onchange="TempConvC(this.value)">
+    <p>Fahrenheit: <span id="Celsius_to_Fahrenheit"></span></p>
+    
+
+
+
+
+
+    <script> 
+    alert("Velkommen din jævel!")
+
+    function TempConvF(valNum) {
+    valNum = parseFloat(valNum);
+
+    document.getElementById("Fahrenheit_to_Celsius").innerHTML = (valNum - 32) / 1.8;
+    }
+
+    function TempConvC(valNum) {
+    valNum = parseFloat(valNum);
+
+    document.getElementById("Celsius_to_Fahrenheit").innerHTML = (valNum * 1.8) + 32;
+    }
+    </script>
+
+
+
+
+
+    </body>
+    </html>
