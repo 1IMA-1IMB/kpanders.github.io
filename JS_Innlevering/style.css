@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    text-align: center;
+    color: #f1f7ed;
+    background-color: #102B3F;
+}
+h1 {
+    text-align: center;
+}
+input {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #f1f7ed;
+    border-radius: 5px; 
+}
+select {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #f1f7ed;
+    border-radius: 5px;
+}
+button {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #f1f7ed;
+    border-radius: 5px;
+    cursor: pointer;
+}
+p {
+    text-align: center;
+}
+

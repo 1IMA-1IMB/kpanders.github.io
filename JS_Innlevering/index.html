@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="no/en">
+<head>
+    <title>Volum Konverterer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="script.js"> <!--her linker jeg til css og js filene mine-->
+    <script defer src="script.js"></script>
+    
+
+</head>
+<body>
+    <h1>Volum Konverterer</h1>
+
+    <input id="Volumverdi1" type="text" placeholder="Legg inn verdi"> <!--her kan brukeren legge inn en verdi som de vil konvertere-->
+    <select id="Volumvelger1">
+        <option value="gallons">Gallons</option>
+        <option value="ounces">Ounces</option>
+        <option value="cups">Cups</option>
+        <option value="spiseskjeer">Spiseskjeer</option> 
+        <option value="liters">Liters</option> 
+    </select>
+    <select id="Volumvelger2">
+        <option value="gallons">Gallons</option>
+        <option value="ounces">Ounces</option>
+        <option value="cups">Cups</option>
+        <option value="spiseskjeer">Spiseskjeer</option>
+        <option value="liters">Liters</option> 
+        <!--her velger brukeren hvilken enhet de vil konvertere til og fra-->
+
+    </select>
+    <button id="KonverterKnapp">Konverter</button>
+    <p id="resultat">Resultat: </p>
+    <br>
+    <br>
+    <br> <!--Mellomrom-->
+    <br>
+    <h1>Palindrome</h1>
+    <input type="submit" onclick="checkpalindrom()" value="check palindrome"> <!--her kan brukeren trykke på en knapp for å sjekke om en verdi er en palindrome-->
+    <input type="text" id="number1" placeholder="Legg inn verdi"> <!--her kan brukeren legge inn en verdi som de vil sjekke om er en palindrome-->
+    <p id="presultat">Palindrome Resultat</p> <!--her vil resultatet av sjekken vises-->
+
+    
+</body>
+</html>
